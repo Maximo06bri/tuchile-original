@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-info text-white"><h4>Generar Reserva</h4></div>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label>Seleccionar Cabaña:</label>
+                        <select name="cabana_id" class="form-select">
+                            {% for c in cabañas %}
+                                <option value="{{ c.id }}">{{ c.nombre }} - ${{ c.precio_noche }} CLP</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label>Fecha Check-in:</label>
+                        <input type="date" name="checkin" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Fecha Check-out:</label>
+                        <input type="date" name="checkout" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-info text-white w-100">Reservar y Ir al Pago</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

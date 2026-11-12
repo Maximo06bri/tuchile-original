@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow">
+            <div class="card-header bg-warning"><h4>Pasarela de Pago - Reserva #{{ reserva.id }}</h4></div>
+            <div class="card-body">
+                <h5>Monto a Pagar: ${{ reserva.total_pago }} CLP</h5>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label>Número de Tarjeta de Crédito:</label>
+                        <input type="text" name="tarjeta" class="form-control" placeholder="1234567812345678" required>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label>CVV:</label>
+                            <input type="text" name="cvv" class="form-control" placeholder="123" required>
+                        </div>
+                        <div class="col">
+                            <label>Expiración:</label>
+                            <input type="text" name="exp" class="form-control" placeholder="12/28" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Procesar Pago ($)</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

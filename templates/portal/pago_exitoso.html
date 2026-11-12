@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="alert alert-success text-center">
+    <h2>¡Pago Procesado Exitosamente!</h2>
+    <p>Su reserva #{{ reserva.id }} ha sido confirmada por un total de ${{ monto }} CLP.</p>
+    <a href="{% url 'dashboard' %}" class="btn btn-primary">Volver al Dashboard</a>
+</div>
+{% endblock %}

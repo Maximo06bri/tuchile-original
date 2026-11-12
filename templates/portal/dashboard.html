@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Panel Principal de Reservas</h2>
+<a href="{% url 'crear_reserva' %}" class="btn btn-primary mb-3">Nueva Reserva</a>
+
+<div class="row">
+    <div class="col-md-6">
+        <h3>Cabañas Disponibles</h3>
+        <ul class="list-group">
+            {% for c in cabañas %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ c.nombre }} ({{ c.zona }})
+                    <span class="badge bg-success rounded-pill">${{ c.precio_noche }}/noche</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h3>Todas las Reservas (IDOR Expreso)</h3>
+        <ul class="list-group">
+            {% for r in reservas %}
+                <li class="list-group-item">
+                    Reserva #{{ r.id }} - {{ r.cabaña.nombre }} | Status: 
+                    {% if r.pagado %}
+                        <span class="badge bg-success">PAGADO</span>
+                    {% else %}
+                        <a href="{% url 'pago_reserva' r.id %}" class="btn btn-sm btn-warning">PAGAR AHORA</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
